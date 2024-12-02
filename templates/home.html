@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Globe Toolkit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #E31D23;
+            --hover-color: #d91c21;
+            --text-color: #2c3e50;
+            --border-color: #e1e8ed;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px var(--shadow-color);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .logo-container img {
+            max-width: 250px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.02);
+        }
+
+        h1 {
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+            font-size: 2.2em;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .tool-card {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card.coming-soon {
+            opacity: 0.8;
+            cursor: default;
+        }
+
+        .tool-card.coming-soon:hover {
+            transform: none;
+            border-color: var(--border-color);
+            box-shadow: none;
+        }
+
+        .coming-soon-badge {
+            position: absolute;
+            top: 12px;
+            right: -35px;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 40px;
+            font-size: 0.8em;
+            transform: rotate(45deg);
+            font-weight: 500;
+        }
+
+        .tool-card:not(.coming-soon):hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(227, 29, 35, 0.1);
+        }
+
+        .tool-icon {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .tool-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .tool-description {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .logo-container img {
+                max-width: 200px;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .logo-container img {
+                max-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="/static/images/logo.png" alt="Company Logo">
+        </div>
+        <h1>Toolkit</h1>
+        <div class="tools-grid">
+            <a href="/cv-formatter" class="tool-card">
+                <i class="fas fa-file-alt tool-icon"></i>
+                <div class="tool-title">CV Formatter</div>
+                <div class="tool-description">
+                    Transform candidate CVs into professionally formatted documents with consistent branding and layout.
+                </div>
+            </a>
+            <a href="#" class="tool-card coming-soon">
+                <i class="fas fa-ad tool-icon"></i>
+                <div class="tool-title">Advert Creator</div>
+                <div class="tool-description">
+                    Generate professional job advertisements with consistent formatting and compelling content.
+                </div>
+                <div class="coming-soon-badge">Coming Soon</div>
+            </a>
+            <a href="#" class="tool-card coming-soon">
+                <i class="fas fa-code-branch tool-icon"></i>
+                <div class="tool-title">Boolean Generator</div>
+                <div class="tool-description">
+                    Create complex Boolean search strings for efficient candidate sourcing across platforms.
+                </div>
+                <div class="coming-soon-badge">Coming Soon</div>
+            </a>
+            <a href="#" class="tool-card coming-soon">
+                <i class="fab fa-linkedin tool-icon"></i>
+                <div class="tool-title">LinkedIn Advert Post</div>
+                <div class="tool-description">
+                    Create engaging LinkedIn job posts with optimized formatting and content structure.
+                </div>
+                <div class="coming-soon-badge">Coming Soon</div>
+            </a>
+            <a href="#" class="tool-card coming-soon">
+                <i class="fas fa-clipboard-list tool-icon"></i>
+                <div class="tool-title">Job Brief Summary</div>
+                <div class="tool-description">
+                    Generate concise job briefs with key requirements and responsibilities clearly outlined.
+                </div>
+                <div class="coming-soon-badge">Coming Soon</div>
+            </a>
+            <a href="/performance-dashboard" class="tool-card">
+                <i class="fas fa-chart-line tool-icon"></i>
+                <div class="tool-title">Performance Dashboard</div>
+                <div class="tool-description">
+                    Track key recruitment metrics, consultant performance, and business analytics in real-time.
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

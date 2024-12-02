@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Formatter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #E31D23;
+            --hover-color: #d91c21;
+            --text-color: #2c3e50;
+            --border-color: #e1e8ed;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --success-color: #28a745;
+            --error-color: #dc3545;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .logo-container img {
+            max-width: 250px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.02);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px var(--shadow-color);
+            animation: fadeInUp 0.8s ease-out;
+            position: relative;
+        }
+
+        h1 {
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+            font-size: 2.2em;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .file-input-container {
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .file-input-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-input-label:hover {
+            border-color: var(--primary-color);
+            background-color: #f1f4f7;
+        }
+
+        .file-input-label i {
+            margin-right: 10px;
+            font-size: 1.2em;
+            color: var(--primary-color);
+        }
+
+        input[type="file"] {
+            position: absolute;
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            width: 100%;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .back-link i {
+            margin-right: 5px;
+        }
+
+        .back-link:hover {
+            color: var(--primary-color);
+        }
+
+        #status {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-weight: 500;
+            text-align: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .success {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success-color);
+            border: 1px solid rgba(40, 167, 69, 0.2);
+        }
+
+        .error {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--error-color);
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .logo-container img {
+                max-width: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .logo-container img {
+                max-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Toolkit
+        </a>
+        <div class="logo-container">
+            <img src="/static/images/logo.png" alt="Company Logo">
+        </div>
+        <h1>CV Formatter</h1>
+        <form id="cvForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Candidate Name</label>
+                <input type="text" id="name" name="name" required placeholder="Enter candidate's full name">
+            </div>
+            <div class="form-group">
+                <label for="job_title">Job Title</label>
+                <input type="text" id="job_title" name="job_title" required placeholder="Enter position title">
+            </div>
+            <div class="form-group">
+                <label for="salary">Candidate Salary</label>
+                <input type="text" id="salary" name="salary" required placeholder="Enter salary expectations">
+            </div>
+            <div class="form-group">
+                <label for="notice_period">Notice Period</label>
+                <input type="text" id="notice_period" name="notice_period" required placeholder="Enter notice period">
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" required placeholder="Enter candidate's location">
+            </div>
+            <div class="form-group">
+                <label>Upload CV</label>
+                <div class="file-input-container">
+                    <label for="cv" class="file-input-label">
+                        <i class="fas fa-upload"></i>
+                        <span id="file-name">Choose a PDF or Word document</span>
+                    </label>
+                    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+                </div>
+            </div>
+            <button type="submit">
+                <span>Process CV</span>
+            </button>
+        </form>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        // Update file name display
+        document.getElementById('cv').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || 'Choose a PDF or Word document';
+            document.getElementById('file-name').textContent = fileName;
+        });
+
+        // Form submission
+        document.getElementById('cvForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const status = document.getElementById('status');
+            const button = e.target.querySelector('button');
+            const originalButtonText = button.innerHTML;
+
+            status.style.display = 'block';
+            status.innerHTML = 'Processing...';
+            status.className = '';
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            button.disabled = true;
+
+            const formData = new FormData(e.target);
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    status.innerHTML = '<i class="fas fa-check-circle"></i> CV processed successfully! Downloading formatted CV...';
+                    status.className = 'success';
+                    window.location.href = `/uploads/${data.output_file}`;
+                } else {
+                    status.innerHTML = `<i class="fas fa-exclamation-circle"></i> Error: ${data.error}`;
+                    status.className = 'error';
+                }
+            } catch (error) {
+                status.innerHTML = '<i class="fas fa-exclamation-triangle"></i> An error occurred while processing the CV';
+                status.className = 'error';
+                console.error('Error:', error);
+            } finally {
+                button.innerHTML = originalButtonText;
+                button.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
